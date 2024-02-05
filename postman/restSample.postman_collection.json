@@ -1,0 +1,452 @@
+{
+	"info": {
+		"_postman_id": "2a8734eb-43fe-4fe7-916d-5e41fc22f1db",
+		"name": "restSample",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18354078",
+		"_collection_link": "https://warped-crater-575958.postman.co/workspace/api_test~517af501-66b1-422f-8396-a38c22af17de/collection/18354078-2a8734eb-43fe-4fe7-916d-5e41fc22f1db?action=share&source=collection_link&creator=18354078"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n  \"name\": {{name}},\r\n  \"password\": {{password}},\r\n  \"confirmPassword\": {{confirmPassword}},\r\n  \"email\": {{email}},\r\n  \"avatar\":\"https://images.pexels.com/photos/6875732/pexels-photo-6875732.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/user/register",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let request_body = JSON.parse(pm.request.body.raw);\r",
+									"pm.test(\"login\", function () {\r",
+									"    let jsonData = pm.response.json();\r",
+									"    console.log(jsonData.data);\r",
+									"    pm.expect(jsonData.status).to.eql(\r",
+									"        \"success\"\r",
+									"    );\r",
+									"    pm.environment.set(\"token\", jsonData.data.token);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":{{name}},\r\n    \"password\":{{password}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/user/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "lineLogin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let request_body = JSON.parse(pm.request.body.raw);\r",
+									"pm.test(\"login\", function () {\r",
+									"    let jsonData = pm.response.json();\r",
+									"    console.log(jsonData.data);\r",
+									"    pm.expect(jsonData.status).to.eql(\r",
+									"        \"success\"\r",
+									"    );\r",
+									"    pm.environment.set(\"token\", jsonData.data.token);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":{{lineName}},\r\n    \"picture\":\"https://images.pexels.com/photos/4271612/pexels-photo-4271612.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/user/lineLogin",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"lineLogin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "userinfo",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/user/userinfo",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"userinfo"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cus",
+			"item": [
+				{
+					"name": "getAllCus",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page\":\"1\",\r\n    \"size\":\"12\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/cus/index",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"cus",
+								"index"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create_cus",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\":{{user_id}},\r\n    \"cus_name\":\"皇阿瑪\",\r\n    \"cus_number\":\"0912345678\",\r\n    \"cus_email\":\"che@verygood.com.tw\",\r\n    \"cus_idnumber\":\"H124341234\",\r\n    \"cus_remark\":\"我是備註\",\r\n    \"cus_status\":\"舊會員\",\r\n    \"cus_level\":\"金\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/cus",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"cus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_cus",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/cus/8",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"cus",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit_cus",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cus_name\":\"皇阿瑪嘿嘿\",\r\n    \"cus_number\":\"0912345678\",\r\n    \"cus_birthday\":\"1992-08-23\",\r\n    \"cus_email\":\"che@verygood.com.tw\",\r\n    \"cus_idnumber\":\"H124341234\",\r\n    \"cus_remark\":\"我是備註\",\r\n    \"cus_status\":\"舊客戶\",\r\n    \"cus_level\":\"金\",\r\n    \"label_names\":[\r\n        {\r\n            \"id\":\"1\",\r\n            \"label_name\":\"勇敢的\"\r\n        },\r\n        {\r\n            \"id\":\"2\",\r\n            \"label_name\":\"誠實的\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/cus/3",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"cus",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "label",
+			"item": [
+				{
+					"name": "getLabel",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cus_id\":\"2\",\r\n    \"label_id\":\"2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/label",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"label"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create_label",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let request_body = JSON.parse(pm.request.body.raw);\r",
+									"pm.test(\"login\", function () {\r",
+									"    let jsonData = pm.response.json();\r",
+									"    console.log(jsonData.data);\r",
+									"    pm.expect(jsonData.status).to.eql(\r",
+									"        \"success\"\r",
+									"    );\r",
+									"    pm.environment.set(\"token\", jsonData.data.token);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"label_name\":\"帥氣的\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/label",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"label"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
