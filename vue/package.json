@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "vue-cli-service serve --mode laravel",
+    "dev": "vue-cli-service serve --mode express",
+    "dev:laravel": "vue-cli-service serve --mode laravel",
     "build": "vue-cli-service build",
     "build-express": "vue-cli-service build --mode express",
     "build-laravel": "vue-cli-service build --mode laravel",

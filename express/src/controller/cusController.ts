@@ -138,9 +138,9 @@ export const edit: ExpressControllerType = async (req, res, next) => {
         cus_level,
         cus_labels: {
           deleteMany: {},
-          createMany: {
-            data: create_cus_labels,
-          },
+          // createMany: {
+          //   data: create_cus_labels,
+          // },
         },
       },
     });
